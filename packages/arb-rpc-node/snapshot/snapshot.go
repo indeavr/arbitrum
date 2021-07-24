@@ -104,6 +104,10 @@ func (s *Snapshot) CodeHash() common.Hash {
 	return s.mach.CodePointHash()
 }
 
+func (s *Snapshot) SegmentStartCodePointHash() common.Hash {
+	return s.mach.SegmentStartCodePointHash()
+}
+
 // AddMessage can only be called if the snapshot is uniquely owned
 // If an error is returned, s is unmodified
 func (s *Snapshot) AddMessage(msg message.Message, sender common.Address, targetHash common.Hash) (*evm.TxResult, error) {
