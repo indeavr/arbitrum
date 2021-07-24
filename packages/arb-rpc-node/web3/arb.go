@@ -20,6 +20,7 @@ import (
 	"fmt"
 
 	ethcommon "github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/pkg/errors"
 
@@ -66,4 +67,12 @@ func (a *Arb) TraceCall(callArgs CallTxArgs, blockNum rpc.BlockNumberOrHash) (st
 		return "", errors.New("no call trace produced")
 	}
 	return trace.String(), nil
+}
+
+func (a *Arb) CodeHash(blockNum rpc.BlockNumberOrHash) (hexutil.Bytes, error) {
+	snap, err := a.srv.getSnapshotForNumberOrHash(blockNum)
+	if err != nil {
+		return nil, err
+	}
+	return snap.CodeHash().Bytes(), nil
 }
