@@ -57,8 +57,7 @@ func GenerateWeb3Server(server *aggregator.Server, privateKeys []*ecdsa.PrivateK
 		if err := s.RegisterName("eth", NewAccounts(ethServer, privateKeys, mode == NonMutatingMode)); err != nil {
 			return nil, err
 		}
-
-		if err := s.RegisterName("arb", &Arb{srv: server}); err != nil {
+		if err := s.RegisterName("arb", &Arb{srv: ethServer}); err != nil {
 			return nil, err
 		}
 

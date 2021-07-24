@@ -35,6 +35,7 @@ import (
 	"github.com/offchainlabs/arbitrum/packages/arb-rpc-node/snapshot"
 	arbcommon "github.com/offchainlabs/arbitrum/packages/arb-util/common"
 	"github.com/offchainlabs/arbitrum/packages/arb-util/machine"
+	"github.com/offchainlabs/arbitrum/packages/arb-util/value"
 )
 
 var logger = log.With().Caller().Stack().Str("component", "web3").Logger()
@@ -192,9 +193,20 @@ func (s *Server) Call(callArgs CallTxArgs, blockNum rpc.BlockNumberOrHash) (hexu
 		return HandleNodeInterfaceCall(s, data, blockNum)
 	}
 
-	snap, err := s.getSnapshotForNumberOrHash(blockNum)
+	res, _, err := s.call(callArgs, blockNum)
 	if err != nil {
 		return nil, err
+	}
+	if res.ResultCode != evm.ReturnCode {
+		return nil, evm.HandleCallError(res, s.ganacheMode)
+	}
+	return res.ReturnData, nil
+}
+
+func (s *Server) call(callArgs CallTxArgs, blockNum rpc.BlockNumberOrHash) (*evm.TxResult, []value.Value, error) {
+	snap, err := s.getSnapshotForNumberOrHash(blockNum)
+	if err != nil {
+		return nil, nil, err
 	}
 	if snap.ArbosVersion() >= 42 && (callArgs.GasPrice == nil || callArgs.GasPrice.ToInt().Sign() <= 0) {
 		callArgs.GasPrice = (*hexutil.Big)(big.NewInt(1 << 60))
@@ -202,12 +214,11 @@ func (s *Server) Call(callArgs CallTxArgs, blockNum rpc.BlockNumberOrHash) (hexu
 
 	from, msg := buildCallMsg(callArgs, s.maxCallGas)
 
-	res, _, err := snap.Call(msg, from)
-
-	if res.ResultCode != evm.ReturnCode {
-		return nil, evm.HandleCallError(res, s.ganacheMode)
+	res, debugPrints, err := snap.Call(msg, from)
+	if err != nil {
+		return nil, nil, err
 	}
-	return res.ReturnData, nil
+	return res, debugPrints, nil
 }
 
 func (s *Server) EstimateGas(args CallTxArgs) (hexutil.Uint64, error) {
