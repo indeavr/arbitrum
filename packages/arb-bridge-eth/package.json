@@ -1,6 +1,6 @@
 {
   "name": "arb-bridge-eth",
-  "version": "0.7.2",
+  "version": "0.7.2-beta.2",
   "description": "",
   "author": "Offchain Labs, Inc.",
   "license": "Apache-2.0",
@@ -45,7 +45,8 @@
     "hardhat": "^2.6.1",
     "@openzeppelin/contracts": "3.4.2",
     "@openzeppelin/contracts-0.8": "npm:@openzeppelin/contracts@^4.3.2",
-    "@openzeppelin/contracts-upgradeable": "3.4.2"
+    "@openzeppelin/contracts-upgradeable": "3.4.2",
+    "arb-upgrades": "1.0.1-beta.1"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",

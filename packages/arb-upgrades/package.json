@@ -1,13 +1,15 @@
 {
   "name": "arb-upgrades",
-  "version": "0.0.1",
+  "version": "1.0.1-beta.1",
   "main": "index.js",
   "license": "Apache-2.0",
   "scripts": {
     "main": "hardhat run index.ts",
     "hardhat": "hardhat",
     "lint": "eslint .",
-    "format": "prettier './**/*.{js,json,md,ts,yml}' --write && yarn run lint --fix"
+    "format": "prettier './**/*.{js,json,md,ts,yml}' --write && yarn run lint --fix",
+    "prepublishOnly": "yarn build && yarn format",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.1",
