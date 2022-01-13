@@ -1843,6 +1843,11 @@ arb-ts@^0.0.36:
     dotenv "^10.0.0"
     ethers "^5.1.0"
 
+arbos-precompiles@1.0.1, arbos-precompiles@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/arbos-precompiles/-/arbos-precompiles-1.0.1.tgz#90de6534d652d5c17b7f6a8c4f58d66bd4cc2d67"
+  integrity sha512-KHTyjtp70ApKgTsLANlM7p75l7PKfP4ptjeh9XEwQsR8ZLxjZ5gsZOXydsKoMqgUUK0HfQtTpsZyZc4B1BLARQ==
+
 archy@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/archy/-/archy-1.0.0.tgz#f9c8c13757cc1dd7bc379ac77b2c62a5c2868c40"
@@ -3112,6 +3117,11 @@ chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.2:
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
+
+chalk@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.0.0.tgz#bd96c6bb8e02b96e08c0c3ee2a9d90e050c7b832"
+  integrity sha512-/duVOqst+luxCQRKEo4bNxinsOQtMP80ZYm7mMqzuh5PociNL0PvmHFvREJ9ueYL2TxlHjBcmLCdmocx9Vg+IQ==
 
 chardet@^0.7.0:
   version "0.7.0"
@@ -5964,7 +5974,7 @@ hardhat-gas-reporter@^1.0.4:
     eth-gas-reporter "^0.2.23"
     sha1 "^1.1.1"
 
-hardhat@^2.6.1, hardhat@^2.6.4:
+hardhat@^2.6.1:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/hardhat/-/hardhat-2.8.0.tgz#4701fafe2de4fe88bed328561e554df85455385b"
   integrity sha512-A2L5F+B7HgdvfcuEWBXyokzP3biSlu4UeIvNR/lgSC0Og/2kbP9cjMMkIH42V1W8nQEZk70VuryhVKX2uHwSYw==
